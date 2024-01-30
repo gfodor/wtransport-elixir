@@ -90,7 +90,7 @@ defmodule Wtransport.StreamHandler do
         Process.monitor(conn_pid)
 
         stream = struct(%Stream{connection: connection}, Map.from_struct(request))
-        state = %{state | conn_pid: conn_pid}
+        state = state |> Map.put(:conn_pid, conn_pid)
 
         {:ok, {stream, {request, state}}, {:continue, :stream_request}}
       end
